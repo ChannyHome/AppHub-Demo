@@ -10,6 +10,8 @@ from fastapi import Request
 from fastapi.responses import ORJSONResponse
 from sqlalchemy.exc import SQLAlchemyError
 from loguru import logger
+from app.db.session import engine
+import asyncio
 
 def create_app() -> FastAPI:
     setup_logging()
@@ -28,8 +30,12 @@ def create_app() -> FastAPI:
     @app.on_event("startup")
     async def _startup():
         await init_db_if_needed()
-        
-    
+
+    @app.on_event("shutdown")
+    async def _shutdown():
+        await asyncio.sleep(0)
+        await engine.dispose()
+
     # create_app() 안에 추가
     @app.exception_handler(SQLAlchemyError)
     async def sqlalchemy_exception_handler(request: Request, exc: SQLAlchemyError):

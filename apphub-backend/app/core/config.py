@@ -21,7 +21,12 @@ class Settings(BaseSettings):
     DB_MAX_OVERFLOW: int = 20
     DB_ECHO: bool = False
 
+    # 개발 편의: true면 startup 시 create_all() 실행 (운영에서는 false)
     APP_INIT_DB: bool = False
+
+    # ✅ 추가: DB 없으면 init.sql로 DB+테이블 생성
+    APP_INIT_SQL: bool = False
+    APP_INIT_SQL_PATH: str = "app/db/sql/init.sql"
 
     AUTH_KNOX_HEADER: str = "x-knox-id"
     BATCH_TIMEZONE: str = "Asia/Seoul"
@@ -32,6 +37,14 @@ class Settings(BaseSettings):
         return (
             f"mysql+aiomysql://{self.DB_USER}:{self.DB_PASSWORD}"
             f"@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
+        )
+
+    @property
+    def DATABASE_URL_ASYNC_BOOTSTRAP(self) -> str:
+        # ✅ DB가 없어도 붙기 위한 URL (db name 없이 서버에만 연결)
+        return (
+            f"mysql+aiomysql://{self.DB_USER}:{self.DB_PASSWORD}"
+            f"@{self.DB_HOST}:{self.DB_PORT}/"
         )
 
 settings = Settings()
