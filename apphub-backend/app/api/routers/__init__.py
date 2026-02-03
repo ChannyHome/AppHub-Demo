@@ -9,6 +9,7 @@ from app.api.routers.hub_events import router as hub_events_router
 from app.api.routers.app_events import router as app_events_router
 from app.api.routers.app_events_admin import router as app_events_admin
 from app.api.routers.metrics import router as metrics_router
+from app.api.routers.agent import router as agent_router
 
 api_router = APIRouter()
 api_router.include_router(health_router, tags=["health"])
@@ -21,3 +22,4 @@ api_router.include_router(hub_events_router, tags=["hub-events"])
 api_router.include_router(app_events_router, tags=["app-events"])
 api_router.include_router(app_events_admin, tags=["app-events-admin"])
 api_router.include_router(metrics_router, tags=["metrics"])
+api_router.include_router(agent_router, tags=["agent"])

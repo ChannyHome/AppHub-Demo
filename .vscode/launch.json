@@ -8,9 +8,9 @@
       "module": "uvicorn",
       "args": ["app.main:app", "--host", "0.0.0.0", "--port", "8500"],
       "console": "integratedTerminal",
-      "cwd": "${workspaceFolder}",
+      "cwd": "${workspaceFolder}/apphub-backend",
       "env": {
-        "PYTHONPATH": "${workspaceFolder}"
+        "PYTHONPATH": "${workspaceFolder}/apphub-backend"
       }
     }
   ]
