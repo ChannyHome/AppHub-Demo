@@ -1,6 +1,5 @@
 from fastapi import FastAPI
 from fastapi.responses import ORJSONResponse
-
 from app.core.config import settings
 from app.core.logging import setup_logging, RequestResponseLoggingMiddleware
 from app.api.routers import api_router
@@ -12,6 +11,7 @@ from sqlalchemy.exc import SQLAlchemyError
 from loguru import logger
 from app.db.session import engine
 import asyncio
+from fastapi.staticfiles import StaticFiles
 
 def create_app() -> FastAPI:
     setup_logging()
@@ -38,6 +38,9 @@ def create_app() -> FastAPI:
     )
 
     app.include_router(api_router, prefix="/api")
+    # 정적 파일 서빙 설정
+    # ex) http://127.0.0.1:8500/api/static/images/AgentTray.png
+    app.mount("/api/static", StaticFiles(directory="storage"), name="static")
 
     @app.on_event("startup")
     async def _startup():
