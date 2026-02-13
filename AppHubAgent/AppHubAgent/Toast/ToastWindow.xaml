@@ -1,0 +1,74 @@
+﻿<Window x:Class="AppHubAgent.Toast.ToastWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ShowInTaskbar="False"
+        ResizeMode="NoResize"
+        Width="340" Height="96" 
+        Loaded="Window_Loaded">
+    <Border x:Name="Root"
+            CornerRadius="12"
+            BorderBrush="#CC1E1E1E"
+            BorderThickness="1"
+            Padding="12"
+            MouseLeftButtonUp="Root_MouseLeftButtonUp"            
+            Cursor="Hand">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="44"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="26"/>
+            </Grid.ColumnDefinitions>
+            <!-- icon -->
+            <Border Width="32" Height="32" CornerRadius="8" Background="#22FFFFFF" VerticalAlignment="Top">
+                <Image x:Name="IconImage" Width="20" Height="20" Stretch="Uniform" Margin="6"/>
+            </Border>
+
+            <!-- text -->
+            <StackPanel Grid.Column="1" Margin="10,0,0,0">
+                <TextBlock x:Name="TitleText" 
+                           FontSize="14" 
+                           FontWeight="SemiBold" 
+                           Foreground="White" 
+                           TextTrimming="CharacterEllipsis"/>
+                <TextBlock x:Name="MessageText" 
+                           FontSize="12" 
+                           Foreground="#CCFFFFFF" 
+                           TextWrapping="Wrap"/>
+            </StackPanel>
+            <!-- close button -->
+            <Button Grid.Column="2" 
+                    x:Name="CloseButton"
+                    Width="22" Height="22" 
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Content="✕" 
+                    FontSize="12" 
+                    Foreground="#CCFFFFFF" 
+                    Background="#00FFFFFF" 
+                    BorderBrush="#00FFFFFF" 
+                    Padding="0" 
+                    Click="CloseButton_Click"
+                    ToolTip="닫기">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="6" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#22FFFFFF"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="#33FFFFFF"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+
+            </Button>
+        </Grid>
+    </Border>
+</Window>

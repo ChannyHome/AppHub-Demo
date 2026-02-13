@@ -10,3 +10,15 @@ magick AgentTray.png -resize 125% -gravity center -background none -extent 512x5
 magick AgentTray.png -resize 130% -gravity center -background none -extent 512x512 AgentTray_130.png 
 
 magick AgentTray_final.png -define icon:auto-resize=256,64,48,32,24,16 AgentTray.ico
+
+-- Custom URL Scheme
+-- 등록
+powershell -ExecutionPolicy Bypass -File register_apphub.ps1
+-- 조회
+reg query "HKLM\SOFTWARE\Classes\apphub" /s
+-- 삭제
+powershell -ExecutionPolicy Bypass -File delete_apphub.ps1
+-- 실행
+Start-Process "apphub://open"
+--실행(파라미터)
+Start-Process "apphub://run?appId=Tool123"
