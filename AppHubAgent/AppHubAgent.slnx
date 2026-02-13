@@ -1,3 +1,4 @@
 <Solution>
+  <Project Path="AppHubAgent.Setup/AppHubAgent.Setup.vdproj" Type="Installer" />
   <Project Path="AppHubAgent/AppHubAgent.csproj" Id="012c7b7f-11a3-4fc8-84b1-6bb8122851b9" />
 </Solution>
