@@ -1,0 +1,6 @@
+﻿services:
+  backend:
+    environment:
+      # 1회 모델 초기화용 override
+      APP_INIT_DB: "true"
+      APP_INIT_SQL: "false"

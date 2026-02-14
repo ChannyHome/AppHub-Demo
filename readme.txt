@@ -22,3 +22,11 @@ powershell -ExecutionPolicy Bypass -File delete_apphub.ps1
 Start-Process "apphub://open"
 --실행(파라미터)
 Start-Process "apphub://run?appId=Tool123"
+
+--nginx
+실행
+Start-Process -FilePath "C:\nginx\nginx.exe" -WorkingDirectory "C:\nginx"
+
+종료
+Start-Process -FilePath "C:\nginx\nginx.exe" -WorkingDirectory "C:\nginx" -ArgumentList "-s","quit"
+

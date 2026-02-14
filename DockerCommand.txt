@@ -1,0 +1,18 @@
+powershell
+
+docker 설치 확인:
+docker --version
+docker compose version
+
+
+그다음 레포 루트(apphub-demo)에서 실행:
+
+# 1회 DB 모델 초기화 포함 실행
+docker compose -f docker-compose.yml -f docker-compose.init-db.yml up --build -d
+
+# 이후 일반 실행(초기화 끔)
+docker compose down
+docker compose up -d
+
+
+# 내 주소
